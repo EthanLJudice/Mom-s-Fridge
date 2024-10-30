@@ -1,0 +1,161 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  
+  /* Header & Navigation */
+  header {
+    background-color: #ffffff;
+    padding: 20px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  nav h1 {
+    font-size: 1.5em;
+    color: #2f4f2f;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .recipes-button {
+    background-color: #2f4f2f;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  /* Main Content */
+  main {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .recipe-search {
+    flex: 3;
+  }
+  
+  .recipe-search h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .recipe-search p {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .recipes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .recipe-item {
+    display: flex;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recipe-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+  
+  .recipe-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .recipe-info h3 {
+    font-size: 1.2em;
+  }
+  
+  .recipe-info p {
+    color: #2f4f2f;
+    font-size: 1em;
+  }
+  
+  button {
+    background-color: #e2e2e2;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2f4f2f;
+    color: #fff;
+  }
+  
+  /* Filters */
+  .filters {
+    flex: 1;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 20px;
+  }
+  
+  .filters h3 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+  }
+  
+  .filters ul {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  
+  .filters li {
+    margin-bottom: 10px;
+  }
+  
+  .filters a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .filters a:hover {
+    color: #2f4f2f;
+  }
+  
+  .search-button {
+    width: 100%;
+    background-color: #2f4f2f;
+    color: #fff;
+    padding: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
