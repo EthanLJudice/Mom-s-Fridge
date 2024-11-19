@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Fridge - Mom's Fridge</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+        }
+        header h1 {
+            font-size: 24px;
+            color: #2e6d37;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+        .recipes-button {
+            background-color: #2e6d37;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .recipes-button:hover {
+            background-color: #1f4b27;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #f8f8f8;
+            border-top: 1px solid #ddd;
+        }
+        .fridge-content {
+            margin-top: 20px;
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mom's Fridge</h1>
+        <nav>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="recipe-search.html">Recipe Search</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="my-fridge.html">My Fridge</a></li>
+            </ul>
+        </nav>
+        <a href="recipes.html" class="recipes-button">Recipes (4)</a>
+    </header>
+    <main>
+        <h2>My Fridge</h2>
+        <div class="fridge-content">
+            <h3>Saved Recipes</h3>
+            <div id="savedRecipes">
+                Saved recipes will be displayed here.
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 Mom's Fridge</p>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        // Load saved recipes when the page loads
+        window.onload = loadSavedRecipes;
+    </script>
+</body>
+</html>
+
 
