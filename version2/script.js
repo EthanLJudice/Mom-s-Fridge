@@ -24,7 +24,22 @@ function searchRecipes() {
             difficulty: "Medium", 
             prepTime: "30 mins",
             instructions: "1. Heat oil in a pan.\n2. Add chicken and cook until browned.\n3. Stir in curry powder and simmer."
-        } 
+        },
+        { 
+            name: "Chicken Parmesan", 
+            ingredients: ["pasta", "chicken", "olive oil", "marinara sauce", "cheese"], 
+            difficulty: "Medium", 
+            prepTime: "30 mins",
+            instructions: "1. Heat a pan with olive oil and cook the chicken to your liking.\n2. Boil water.\n3. Add pasta and cook until al dente.\n4. Drain and add marinara sauce into a pan with your chicken."
+        }, 
+        { 
+            name: "Nachos", 
+            ingredients: ["ground beef", "cheese", "chips"], 
+            difficulty: "Easy", 
+            prepTime: "15 mins",
+            instructions: "1. Cook ground beef in a large skillet.\n2. Lay out your chips on a baking pan.\n3. Put your cooked beef into the crevices of the chips and layer the top with cheese.\n4. Bake your nachos for 5-10 minutes then serve."
+        }, 
+        
     ]; 
 
     // Split and trim ingredients
