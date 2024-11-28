@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Search - Mom's Fridge</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --header-bg: #f8f8f8;
+            --border-color: #ddd;
+            --card-bg: #f4f4f4;
+            --text-color: #333;
+        }
+
+        .dark-mode {
+            --header-bg: #1e1e1e;
+            --border-color: #333;
+            --card-bg: #2a2a2a;
+            --text-color: #eaeaea;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-title img {
+            height: 24px;
+            width: auto;
+        }
+
+        .logo-title h1 {
+            font-size: 24px;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 16px;
+        }
+
+        .recipes-button {
+            background-color: #2e6d37;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid #2e6d37;
+            font-size: 14px;
+        }
+
+        .recipes-button:hover {
+            background-color: #1f4b27;
+            border: 2px solid #1f4b27;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .filters {
+            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .recipe-item {
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: var(--card-bg);
+        }
+
+        .recipe-item button {
+            background-color: #2e6d37;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .recipe-item button:hover {
+            background-color: #1f4b27;
+        }
+
+        .saved-results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--card-bg);
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <img src="momsfridge.png" alt="Mom's Fridge Logo">
+            <h1>Mom's Fridge</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="recipe-search.html">Recipe Search</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="my-fridge.html">My Fridge</a></li>
+            </ul>
+        </nav>
+        <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
+        <a href="recipes.html" class="recipes-button">Recipes (4)</a>
+    </header>
+    <main>
+        <h2>Search for Recipes</h2>
+        <input type="text" id="ingredients" placeholder="Enter ingredients">
+        <button onclick="searchRecipes()">Search</button>
+        <div id="results"></div>
+    </main>
+    <footer>
+        <p>© 2024 Mom's Fridge</p>
+    </footer>
+    <script>
+        // Dark Mode Toggle Script
+        document.addEventListener("DOMContentLoaded", () => {
+            const darkModeToggle = document.getElementById("darkModeToggle");
+
+            // Check user's preference from localStorage
+            const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+
+            // Apply dark mode if it was previously enabled
+            if (isDarkMode) {
+                document.body.classList.add("dark-mode");
+                darkModeToggle.textContent = "☀️";
+            }
+
+            // Toggle dark mode on button click
+            darkModeToggle.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+                const darkModeEnabled = document.body.classList.contains("dark-mode");
+
+                // Save user preference in localStorage
+                localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
+
+                // Update button icon
+                darkModeToggle.textContent = darkModeEnabled ? "☀️" : "🌙";
+            });
+        });
+
+        // Placeholder function for recipe search
+        function searchRecipes() {
+            const ingredients = document.getElementById("ingredients").value;
+            const results = document.getElementById("results");
+
+            if (ingredients.trim() === "") {
+                results.innerHTML = "<p>Please enter some ingredients to search for recipes.</p>";
+                return;
+            }
+
+            results.innerHTML = `<p>Searching recipes for: <strong>${ingredients}</strong>...</p>`;
+        }
+    </script>
+</body>
+</html>

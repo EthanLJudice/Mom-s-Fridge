@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Fridge</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --header-bg: #f8f8f8;
+            --border-color: #ddd;
+            --card-bg: #f4f4f4;
+            --text-color: #333;
+        }
+
+        .dark-mode {
+            --header-bg: #1e1e1e;
+            --border-color: #333;
+            --card-bg: #2a2a2a;
+            --text-color: #eaeaea;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--header-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-title img {
+            height: 24px;
+            width: auto;
+        }
+
+        .logo-title h1 {
+            font-size: 24px;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 16px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-btn {
+            text-decoration: none;
+            color: white;
+            background-color: #2e6d37;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .auth-btn:hover {
+            background-color: #1f4b27;
+        }
+
+        .recipes-button {
+            background-color: #2e6d37;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 2px solid #2e6d37;
+            font-size: 14px;
+            display: none; /* Hidden by default */
+        }
+
+        .recipes-button:hover {
+            background-color: #1f4b27;
+            border: 2px solid #1f4b27;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .dark-mode-toggle {
+            position: fixed; /* Fixed position ensures it stays in one spot */
+            bottom: 20px; /* Position from bottom */
+            right: 20px; /* Position from right */
+            background: #2e6d37; /* Background color */
+            border: none; /* Remove border */
+            color: white; /* Text color */
+            width: 50px; /* Ensure the button is a perfect circle */
+            height: 50px; /* Match width for circular shape */
+            padding: 0; /* No padding to ensure circular shape */
+            border-radius: 50%; /* Make it circular */
+            font-size: 24px; /* Adjust font size for better visibility */
+            cursor: pointer; /* Show pointer cursor */
+            z-index: 1000; /* Ensure it stays above other elements */
+            display: flex; /* Flexbox for centering the icon */
+            justify-content: center; /* Center icon horizontally */
+            align-items: center; /* Center icon vertically */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+        }
+
+        .dark-mode-toggle:hover {
+            background: #1f4b27; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <img src="momsfridge.png" alt="Mom's Fridge Logo">
+            <h1>Mom's Fridge</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="recipe-search.html">Recipe Search</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="my-fridge.html">My Fridge</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="signup.html" class="auth-btn">Sign Up</a>
+            <a href="login.html" class="auth-btn">Login</a>
+        </div>
+        <a href="recipes.html" class="recipes-button" id="recipes-btn">Recipes (4)</a>
+    </header>
+    <main>
+        <h2>Find Recipes Based on Your Ingredients!</h2>
+        <p>Input your available ingredients to get started.</p>
+    </main>
+    <footer>
+        <p>© 2024 Mom's Fridge</p>
+    </footer>
+    <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+
+        const auth = getAuth();
+
+        // Update UI based on authentication state
+        onAuthStateChanged(auth, (user) => {
+            const authButtons = document.querySelectorAll(".auth-btn");
+            const recipesBtn = document.getElementById("recipes-btn");
+
+            if (user) {
+                authButtons.forEach((btn) => (btn.style.display = "none"));
+                recipesBtn.style.display = "inline-block";
+            } else {
+                authButtons.forEach((btn) => (btn.style.display = "inline-block"));
+                recipesBtn.style.display = "none";
+            }
+        });
+
+        // Dark mode logic
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const body = document.body;
+
+        const applyDarkMode = (isDark) => {
+            body.classList.toggle("dark-mode", isDark);
+            darkModeToggle.textContent = isDark ? "☀️" : "🌙";
+            localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+        };
+
+        const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+        applyDarkMode(isDarkMode);
+
+        darkModeToggle.addEventListener("click", () => {
+            const isNowDarkMode = !body.classList.contains("dark-mode");
+            applyDarkMode(isNowDarkMode);
+        });
+    </script>
+</body>
+</html>

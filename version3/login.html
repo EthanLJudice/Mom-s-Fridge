@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mom's Fridge</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <img src="momsfridge.png" alt="Mom's Fridge Logo">
+            <h1>Mom's Fridge</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="recipe-search.html">Recipe Search</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="my-fridge.html">My Fridge</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password" required><br><br>
+            
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    </main>
+    <footer>
+        <p>© 2024 Mom's Fridge</p>
+    </footer>
+
+    <!-- Import firebase.js -->
+    <script type="module">
+        import { login } from './firebase.js';
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+
+        const auth = getAuth();
+
+        // Get redirect parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('redirect') || "recipe-search.html"; // Default to recipe-search.html
+
+        // Redirect if already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("User already logged in:", user.email);
+                window.location.href = redirectUrl;
+            }
+        });
+
+        // Handle form submission for login
+        const loginForm = document.getElementById('login-form');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the form from refreshing the page
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                // Call the login function
+                await login(email, password);
+
+                // Redirect to the original page or default
+                window.location.href = redirectUrl;
+            } catch (error) {
+                console.error('Error during login:', error.message);
+                alert(`Login failed: ${error.message}`);
+            }
+        });
+    </script>
+</body>
+</html>

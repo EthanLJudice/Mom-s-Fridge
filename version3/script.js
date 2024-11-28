@@ -125,3 +125,30 @@ function loadSavedRecipes() {
         savedRecipesDiv.innerHTML = 'No saved recipes yet.';
     }
 }
+
+// Dark Mode Toggle Script
+document.addEventListener("DOMContentLoaded", () => {
+    const darkModeToggle = document.getElementById("darkModeToggle");
+
+    // Check user's preference from localStorage
+    const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+
+    // Apply dark mode if it was previously enabled
+    if (isDarkMode) {
+        document.body.classList.add("dark-mode");
+        darkModeToggle.textContent = "☀️";
+    }
+
+    // Toggle dark mode on button click
+    darkModeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const darkModeEnabled = document.body.classList.contains("dark-mode");
+
+        // Save user preference in localStorage
+        localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
+
+        // Update button icon
+        darkModeToggle.textContent = darkModeEnabled ? "☀️" : "🌙";
+    });
+});
+

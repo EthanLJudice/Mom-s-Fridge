@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Mom's Fridge</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <img src="momsfridge.png" alt="Mom's Fridge Logo">
+            <h1>Mom's Fridge</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="recipe-search.html">Recipe Search</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="my-fridge.html">My Fridge</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username" required><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password" required><br><br>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Log in</a></p>
+    </main>
+    <footer>
+        <p>© 2024 Mom's Fridge</p>
+    </footer>
+
+    <!-- Include Firebase App and Firebase Functions -->
+    <script type="module">
+        import { signUp } from "./firebase.js"; // Import the sign-up function from firebase.js
+
+        // Handle form submission and sign up logic
+        const signupForm = document.getElementById('signupForm');
+        
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the form from refreshing the page
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                // Call sign-up function from firebase.js
+                await signUp(email, password, username);
+                alert('Sign-up successful! Please log in.');
+                // Redirect to login page after successful sign-up
+                window.location.href = 'login.html'; 
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
