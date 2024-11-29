@@ -11,6 +11,9 @@
             --border-color: #ddd;
             --card-bg: #f4f4f4;
             --text-color: #333;
+            --accent-color: #2e6d37;
+            --button-hover: #1f4b27;
+            --transition-speed: 0.3s;
         }
 
         .dark-mode {
@@ -18,40 +21,45 @@
             --border-color: #333;
             --card-bg: #2a2a2a;
             --text-color: #eaeaea;
+            --accent-color: #5a9a60;
+            --button-hover: #3e7c43;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: var(--header-bg);
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            transition: background-color var(--transition-speed);
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 15px 30px;
             background-color: var(--header-bg);
             border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-speed);
         }
 
         .logo-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .logo-title img {
-            height: 24px;
+            height: 30px;
             width: auto;
         }
 
         .logo-title h1 {
-            font-size: 24px;
+            font-size: 28px;
             color: var(--text-color);
             margin: 0;
+            font-weight: 600;
         }
 
         nav ul {
@@ -59,16 +67,19 @@
             padding: 0;
             margin: 0;
             display: flex;
-        }
-
-        nav ul li {
-            margin: 0 15px;
+            gap: 20px;
         }
 
         nav ul li a {
             text-decoration: none;
             color: var(--text-color);
             font-size: 16px;
+            font-weight: 500;
+            transition: color var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
         }
 
         .auth-buttons {
@@ -79,57 +90,79 @@
         .auth-btn {
             text-decoration: none;
             color: white;
-            background-color: #2e6d37;
-            padding: 8px 15px;
+            background-color: var(--accent-color);
+            padding: 10px 20px;
             border-radius: 5px;
             font-size: 14px;
+            transition: background-color var(--transition-speed);
         }
 
         .auth-btn:hover {
-            background-color: #1f4b27;
+            background-color: var(--button-hover);
         }
 
         .recipes-button {
-            background-color: #2e6d37;
+            background-color: var(--accent-color);
             color: white;
-            padding: 8px 15px;
+            padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            border: 2px solid #2e6d37;
+            border: 2px solid var(--accent-color);
             font-size: 14px;
-            display: none; /* Hidden by default */
+            display: none;
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
         }
 
         .recipes-button:hover {
-            background-color: #1f4b27;
-            border: 2px solid #1f4b27;
+            background-color: var(--button-hover);
+            border-color: var(--button-hover);
         }
 
         main {
-            padding: 20px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
         }
 
         .fridge-content {
-            margin-top: 20px;
             background-color: var(--card-bg);
-            padding: 15px;
-            border-radius: 5px;
+            padding: 20px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .fridge-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        #savedRecipes {
+            margin-top: 10px;
+            font-size: 16px;
+            color: var(--text-color);
         }
 
         footer {
             text-align: center;
-            padding: 10px 0;
-            background-color: var(--header-bg);
+            padding: 15px 0;
+            background-color: #a6c0b5; 
             border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-color);
+            transition: background-color var(--transition-speed);
         }
 
-        /* Style for dark mode toggle in bottom-right corner */
         .dark-mode-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #2e6d37;
+            background: var(--accent-color);
             border: none;
             color: white;
             width: 50px;
@@ -142,10 +175,34 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color var(--transition-speed);
         }
 
         .dark-mode-toggle:hover {
-            background: #1f4b27;
+            background: var(--button-hover);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            .logo-title h1 {
+                font-size: 24px;
+            }
+
+            .recipes-button {
+                display: inline-block;
+                margin-top: 15px;
+            }
         }
     </style>
 </head>
@@ -182,53 +239,32 @@
         <p>© 2024 Mom's Fridge</p>
     </footer>
     <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
-    <script type="module">
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+    <script >
+        document.addEventListener("DOMContentLoaded", () => {
+            const darkModeToggle = document.getElementById("darkModeToggle");
 
-        const auth = getAuth();
+            // Check user's preference from localStorage
+            const isDarkMode = localStorage.getItem("darkMode") === "enabled";
 
-        // Update UI based on authentication state
-        onAuthStateChanged(auth, (user) => {
-            const authButtons = document.querySelectorAll(".auth-btn");
-            const recipesBtn = document.getElementById("recipes-btn");
-
-            if (user) {
-                authButtons.forEach((btn) => (btn.style.display = "none"));
-                recipesBtn.style.display = "inline-block";
-            } else {
-                authButtons.forEach((btn) => (btn.style.display = "inline-block"));
-                recipesBtn.style.display = "none";
+            // Apply dark mode if it was previously enabled
+            if (isDarkMode) {
+                document.body.classList.add("dark-mode");
+                darkModeToggle.textContent = "☀️";
             }
+
+            // Toggle dark mode on button click
+            darkModeToggle.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+                const darkModeEnabled = document.body.classList.contains("dark-mode");
+
+                // Save user preference in localStorage
+                localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
+
+                // Update button icon
+                darkModeToggle.textContent = darkModeEnabled ? "☀️" : "🌙";
+            });
         });
 
-        // Dark Mode Logic
-        const darkModeToggle = document.getElementById("darkModeToggle");
-        const body = document.body;
-
-        const applyDarkMode = (isDark) => {
-            console.log("Applying dark mode:", isDark);
-            body.classList.toggle("dark-mode", isDark);
-            darkModeToggle.textContent = isDark ? "☀️" : "🌙";
-            localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
-        };
-
-        const isDarkMode = localStorage.getItem("darkMode") === "enabled";
-        applyDarkMode(isDarkMode);
-
-        darkModeToggle.addEventListener("click", () => {
-            console.log("Dark mode button clicked!");
-            const isNowDarkMode = body.classList.toggle("dark-mode");
-            localStorage.setItem("darkMode", isNowDarkMode ? "enabled" : "disabled");
-            darkModeToggle.textContent = isNowDarkMode ? "☀️" : "🌙";
-        });
-
-        // Load saved recipes when the page loads
-        const loadSavedRecipes = () => {
-            const savedRecipesContainer = document.getElementById("savedRecipes");
-            savedRecipesContainer.innerHTML = "<p>No saved recipes yet. Add some!</p>";
-        };
-
-        window.onload = loadSavedRecipes;
     </script>
 </body>
 </html>

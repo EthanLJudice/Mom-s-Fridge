@@ -5,6 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Mom's Fridge</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #2e6d37;
+            --accent-color: #1f4b27;
+            --light-bg: #f8f8f8;
+            --input-bg: #f4f4f4;
+            --button-bg: #2e6d37;
+            --button-hover: #1f4b27;
+            --text-color: #333;
+            --border-color: #ddd;
+            --focus-color: #5a9a60;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background-color var(--transition-speed);
+        }
+
+        header {
+            width: 95%;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+            
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-title img {
+            height: 30px;
+        }
+
+        .logo-title h1 {
+            font-size: 28px;
+            color: var(--text-color);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: 500;
+            transition: color var(--transition-speed);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        main {
+            padding: 20px 40px;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+            transition: border-color var(--transition-speed);
+        }
+
+        input:focus {
+            border-color: var(--focus-color);
+            outline: none;
+        }
+
+        button {
+            background-color: var(--button-bg);
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        p a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 20px;
+            background-color: var(--light-bg);
+            width: 100%;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .logo-title h1 {
+                font-size: 24px;
+            }
+
+            main {
+                padding: 20px;
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -21,27 +192,28 @@
             </ul>
         </nav>
     </header>
+    
     <main>
         <h2>Sign Up</h2>
         <form id="signupForm">
             <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter your username" required><br><br>
+            <input type="text" id="username" placeholder="Enter your username" required><br>
             
             <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Enter your email" required><br><br>
+            <input type="email" id="email" placeholder="Enter your email" required><br>
             
             <label for="password">Password:</label>
-            <input type="password" id="password" placeholder="Enter your password" required><br><br>
+            <input type="password" id="password" placeholder="Enter your password" required><br>
             
             <button type="submit">Sign Up</button>
         </form>
         <p>Already have an account? <a href="login.html">Log in</a></p>
     </main>
+    
     <footer>
         <p>© 2024 Mom's Fridge</p>
     </footer>
 
-    <!-- Include Firebase App and Firebase Functions -->
     <script type="module">
         import { signUp } from "./firebase.js"; // Import the sign-up function from firebase.js
 

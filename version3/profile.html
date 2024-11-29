@@ -5,24 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - Mom's Fridge</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --header-bg: #f8f8f8;
-            --border-color: #ddd;
-            --card-bg: #f4f4f4;
+            --primary-bg: #f8f8f8;
+            --secondary-bg: #f4f4f4;
+            --accent-color: #2e6d37;
             --text-color: #333;
+            --text-light: #eaeaea;
+            --border-color: #ddd;
+            --button-bg: #2e6d37;
+            --button-hover-bg: #1f4b27;
+            --header-bg: #fff;
         }
 
         .dark-mode {
-            --header-bg: #1e1e1e;
-            --border-color: #333;
-            --card-bg: #2a2a2a;
+            --primary-bg: #1e1e1e;
+            --secondary-bg: #2a2a2a;
+            --accent-color: #2e6d37;
             --text-color: #eaeaea;
+            --text-light: #f1f1f1;
+            --border-color: #333;
+            --button-bg: #2e6d37;
+            --button-hover-bg: #1f4b27;
+            --header-bg: #333;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: var(--header-bg);
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary-bg);
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -32,9 +43,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 15px 20px;
             background-color: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .logo-title {
@@ -44,14 +55,14 @@
         }
 
         .logo-title img {
-            height: 24px;
+            height: 30px;
             width: auto;
         }
 
         .logo-title h1 {
-            font-size: 24px;
-            color: var(--text-color);
+            font-size: 28px;
             margin: 0;
+            color: var(--text-color);
         }
 
         nav ul {
@@ -62,13 +73,18 @@
         }
 
         nav ul li {
-            margin: 0 15px;
+            margin: 0 20px;
         }
 
         nav ul li a {
             text-decoration: none;
             color: var(--text-color);
             font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
         }
 
         .auth-buttons {
@@ -79,57 +95,64 @@
         .auth-btn {
             text-decoration: none;
             color: white;
-            background-color: #2e6d37;
-            padding: 8px 15px;
+            background-color: var(--button-bg);
+            padding: 8px 20px;
             border-radius: 5px;
             font-size: 14px;
+            transition: background-color 0.3s;
         }
 
         .auth-btn:hover {
-            background-color: #1f4b27;
+            background-color: var(--button-hover-bg);
         }
 
         .recipes-button {
-            background-color: #2e6d37;
+            background-color: var(--button-bg);
             color: white;
             padding: 8px 15px;
             text-decoration: none;
             border-radius: 5px;
-            border: 2px solid #2e6d37;
+            border: 2px solid var(--button-bg);
             font-size: 14px;
             display: none; /* Hidden by default */
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .recipes-button:hover {
-            background-color: #1f4b27;
-            border: 2px solid #1f4b27;
+            background-color: var(--button-hover-bg);
+            border-color: var(--button-hover-bg);
         }
 
         main {
-            padding: 20px;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
         }
 
         .profile-content {
-            margin-top: 20px;
-            background-color: var(--card-bg);
-            padding: 15px;
-            border-radius: 5px;
+            background-color: var(--secondary-bg);
+            padding: 20px;
+            border-radius: 10px;
             border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
         }
 
         footer {
             text-align: center;
-            padding: 10px 0;
-            background-color: var(--header-bg);
-            border-top: 1px solid var(--border-color);
+            padding: 15px;
+            background-color: #a6c0b5;  
+            border-top: 2px solid var(--border-color);
+            font-size: 14px;
         }
 
-        /* Style for dark mode toggle in bottom-right corner */
+        /* Dark Mode Toggle */
         .dark-mode-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #2e6d37;
+            background: var(--accent-color);
             border: none;
             color: white;
             width: 50px;
@@ -142,10 +165,32 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
         }
 
         .dark-mode-toggle:hover {
-            background: #1f4b27;
+            background: var(--button-hover-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .profile-content {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -170,8 +215,8 @@
         <a href="recipes.html" class="recipes-button" id="recipes-btn">Recipes (4)</a>
     </header>
     <main>
-        <h2>My Profile</h2>
         <div class="profile-content">
+            <h2>My Profile</h2>
             <p><strong>Name:</strong> [User's Name]</p>
             <p><strong>Email:</strong> [User's Email]</p>
             <p><strong>Preferences:</strong> [e.g., Low Carb, Vegan]</p>
@@ -182,44 +227,37 @@
     </footer>
     <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
     <script>
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
-        const auth = getAuth();
 
-        // Update UI based on authentication state
-        onAuthStateChanged(auth, (user) => {
-            const authButtons = document.querySelectorAll(".auth-btn");
-            const recipesBtn = document.getElementById("recipes-btn");
+document.addEventListener("DOMContentLoaded", () => {
+            const darkModeToggle = document.getElementById("darkModeToggle");
 
-            if (user) {
-                authButtons.forEach((btn) => (btn.style.display = "none"));
-                recipesBtn.style.display = "inline-block";
-            } else {
-                authButtons.forEach((btn) => (btn.style.display = "inline-block"));
-                recipesBtn.style.display = "none";
+            // Check user's preference from localStorage
+            const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+
+            // Apply dark mode if it was previously enabled
+            if (isDarkMode) {
+                document.body.classList.add("dark-mode");
+                darkModeToggle.textContent = "☀️";
             }
+
+            // Toggle dark mode on button click
+            darkModeToggle.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+                const darkModeEnabled = document.body.classList.contains("dark-mode");
+
+                // Save user preference in localStorage
+                localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
+
+                // Update button icon
+                darkModeToggle.textContent = darkModeEnabled ? "☀️" : "🌙";
+            });
         });
 
-        // Dark Mode Logic
-        const darkModeToggle = document.getElementById("darkModeToggle");
-        const body = document.body;
 
-        const applyDarkMode = (isDark) => {
-            console.log("Applying dark mode:", isDark);
-            body.classList.toggle("dark-mode", isDark);
-            darkModeToggle.textContent = isDark ? "☀️" : "🌙";
-            localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
-        };
 
-        const isDarkMode = localStorage.getItem("darkMode") === "enabled";
-        applyDarkMode(isDarkMode);
 
-        darkModeToggle.addEventListener("click", () => {
-            console.log("Dark mode button clicked!");
-            const isNowDarkMode = body.classList.toggle("dark-mode");
-            localStorage.setItem("darkMode", isNowDarkMode ? "enabled" : "disabled");
-            darkModeToggle.textContent = isNowDarkMode ? "☀️" : "🌙";
-        });
+
     </script>
 </body>
 </html>

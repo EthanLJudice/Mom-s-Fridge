@@ -11,6 +11,9 @@
             --border-color: #ddd;
             --card-bg: #f4f4f4;
             --text-color: #333;
+            --primary-color: #2e6d37;
+            --secondary-color: #1f4b27;
+            --accent-color: #f0b400;
         }
 
         .dark-mode {
@@ -18,40 +21,45 @@
             --border-color: #333;
             --card-bg: #2a2a2a;
             --text-color: #eaeaea;
+            --primary-color: #7aaf7b;
+            --secondary-color: #4c734f;
+            --accent-color: #ff9e00;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--header-bg);
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 20px 30px;
             background-color: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .logo-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .logo-title img {
-            height: 24px;
+            height: 36px;
             width: auto;
         }
 
         .logo-title h1 {
-            font-size: 24px;
+            font-size: 28px;
             color: var(--text-color);
             margin: 0;
+            font-weight: bold;
         }
 
         nav ul {
@@ -59,86 +67,144 @@
             padding: 0;
             margin: 0;
             display: flex;
+            gap: 20px;
         }
 
         nav ul li {
-            margin: 0 15px;
+            margin: 0;
         }
 
         nav ul li a {
             text-decoration: none;
             color: var(--text-color);
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
         }
 
         .auth-buttons {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             align-items: center;
         }
 
         .auth-btn {
             text-decoration: none;
             color: white;
-            background-color: #2e6d37;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-size: 14px;
+            background-color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
 
         .auth-btn:hover {
-            background-color: #1f4b27;
+            background-color: var(--secondary-color);
         }
 
         .recipes-button {
-            background-color: #2e6d37;
+            background-color: var(--primary-color);
             color: white;
-            padding: 8px 15px;
+            padding: 10px 20px;
             text-decoration: none;
-            border-radius: 5px;
-            border: 2px solid #2e6d37;
-            font-size: 14px;
+            border-radius: 30px;
+            font-size: 16px;
+            border: 2px solid var(--primary-color);
             display: none; /* Hidden by default */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .recipes-button:hover {
-            background-color: #1f4b27;
-            border: 2px solid #1f4b27;
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
         }
 
         main {
-            padding: 20px;
+            padding: 40px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        main h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        main p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
         }
 
         footer {
             text-align: center;
-            padding: 10px 0;
-            background-color: var(--header-bg);
-            border-top: 1px solid var(--border-color);
+            padding: 20px 30px;
+            background-color: #a6c0b5;  
+            border-top: 2px solid var(--border-color);
         }
 
-        /* Style for dark mode toggle in bottom-right corner */
+        footer p {
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
         .dark-mode-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #2e6d37;
+            background: var(--primary-color);
             border: none;
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
         }
 
         .dark-mode-toggle:hover {
-            background: #1f4b27;
+            background: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .auth-buttons {
+                margin-top: 20px;
+            }
+
+            .logo-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            main {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -165,34 +231,28 @@
     <main>
         <h2>About Us</h2>
         <p>Welcome to Mom's Fridge! We help you find recipes based on the ingredients you have.</p>
-        <p>Meet the developers: [Your Names]</p>
+        <p>Meet the developers: [Our Names]</p>
+        <img src="momsfridge.png" alt="Mom's Fridge Logo"> 
+        <p>Our story here.</p>
     </main>
     <footer>
         <p>© 2024 Mom's Fridge</p>
     </footer>
     <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
     <script>
-        console.log("Script loaded!");
-
         const darkModeToggle = document.getElementById("darkModeToggle");
         const body = document.body;
 
-        // Apply or remove dark mode based on state
         const applyDarkMode = (isDark) => {
-            console.log("Applying dark mode:", isDark);
             body.classList.toggle("dark-mode", isDark);
             darkModeToggle.textContent = isDark ? "☀️" : "🌙";
             localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
         };
 
-        // Check initial dark mode state
         const isDarkMode = localStorage.getItem("darkMode") === "enabled";
-        console.log("Initial dark mode state:", isDarkMode);
         applyDarkMode(isDarkMode);
 
-        // Toggle dark mode
         darkModeToggle.addEventListener("click", () => {
-            console.log("Dark mode button clicked!");
             const isNowDarkMode = body.classList.toggle("dark-mode");
             localStorage.setItem("darkMode", isNowDarkMode ? "enabled" : "disabled");
             darkModeToggle.textContent = isNowDarkMode ? "☀️" : "🌙";

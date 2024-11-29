@@ -11,6 +11,9 @@
             --border-color: #ddd;
             --card-bg: #f4f4f4;
             --text-color: #333;
+            --button-bg: #2e6d37;
+            --button-hover-bg: #1f4b27;
+            --input-bg: #fff;
         }
 
         .dark-mode {
@@ -18,6 +21,9 @@
             --border-color: #333;
             --card-bg: #2a2a2a;
             --text-color: #eaeaea;
+            --button-bg: #4c9a2a;
+            --button-hover-bg: #3b7d21;
+            --input-bg: #444;
         }
 
         body {
@@ -26,15 +32,16 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 20px 30px;
             background-color: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .logo-title {
@@ -44,12 +51,12 @@
         }
 
         .logo-title img {
-            height: 24px;
+            height: 30px;
             width: auto;
         }
 
         .logo-title h1 {
-            font-size: 24px;
+            font-size: 28px;
             color: var(--text-color);
             margin: 0;
         }
@@ -68,79 +75,165 @@
         nav ul li a {
             text-decoration: none;
             color: var(--text-color);
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--button-bg);
         }
 
         .recipes-button {
-            background-color: #2e6d37;
+            background-color: var(--button-bg);
             color: white;
-            padding: 8px 15px;
+            padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            border: 2px solid #2e6d37;
+            border: 2px solid var(--button-bg);
             font-size: 14px;
+            display: flex;
+            align-items: center;
         }
 
         .recipes-button:hover {
-            background-color: #1f4b27;
-            border: 2px solid #1f4b27;
+            background-color: var(--button-hover-bg);
+            border: 2px solid var(--button-hover-bg);
         }
 
         main {
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        .filters {
+        h2 {
+            font-size: 32px;
             margin-bottom: 20px;
-            background-color: var(--card-bg);
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
-        .recipe-item {
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 15px;
-            background-color: var(--card-bg);
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .recipe-item button {
-            background-color: #2e6d37;
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--button-bg);
+            outline: none;
+        }
+
+        button {
+            background-color: var(--button-bg);
             color: white;
-            padding: 5px 10px;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
-        .recipe-item button:hover {
-            background-color: #1f4b27;
+        button:hover {
+            background-color: var(--button-hover-bg);
         }
 
-        .saved-results {
-            margin-top: 20px;
-            padding: 15px;
+        .filters, .saved-results, .recipe-item {
             background-color: var(--card-bg);
-            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
         }
 
         footer {
             text-align: center;
-            padding: 10px 0;
-            background-color: var(--header-bg);
+            padding: 15px 20px;
+            background-color: #a6c0b5;  
             border-top: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
 
         .dark-mode-toggle {
-            background: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--button-bg);
             border: none;
-            font-size: 18px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 28px;
             cursor: pointer;
-            color: var(--text-color);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
         }
+
+        .dark-mode-toggle:hover {
+            color: var(--button-bg);
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+
+
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .auth-buttons {
+                margin-top: 20px;
+            }
+
+            .logo-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+
+
+
+        }
+
     </style>
 </head>
 <body>
@@ -158,12 +251,14 @@
             </ul>
         </nav>
         <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
-        <a href="recipes.html" class="recipes-button">Recipes (4)</a>
+        <a href="signup.html" class="recipes-button">Recipes (4)</a>
     </header>
     <main>
         <h2>Search for Recipes</h2>
-        <input type="text" id="ingredients" placeholder="Enter ingredients">
-        <button onclick="searchRecipes()">Search</button>
+        <div class="search-container">
+            <input type="text" id="ingredients" placeholder="Enter ingredients">
+            <button onclick="searchRecipes()">Search</button>
+        </div>
         <div id="results"></div>
     </main>
     <footer>
