@@ -1,8 +1,24 @@
-// Import Firebase Modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+    setPersistence,
+    browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+import {
+    getAnalytics
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -16,13 +32,24 @@ const firebaseConfig = {
     measurementId: "G-D7LTDMCMHB"
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
-// Get Firebase services
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+// Enable persistence
+const enablePersistence = async () => {
+    try {
+        await setPersistence(auth, browserLocalPersistence);
+        console.log("Persistence enabled");
+    } catch (error) {
+        console.error("Failed to enable persistence:", error);
+    }
+};
+
+enablePersistence();
 
 // Sign-Up Function
 const signUp = async (email, password, username) => {
@@ -38,7 +65,8 @@ const signUp = async (email, password, username) => {
         });
 
         console.log("User signed up successfully:", user);
-        alert("Sign-up successful! You can now log in.");
+        alert("Sign-up successful! Redirecting to login...");
+        window.location.href = "login.html";
     } catch (error) {
         console.error("Error signing up:", error.message);
         alert(error.message);
@@ -51,11 +79,10 @@ const login = async (email, password) => {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         console.log("User logged in:", user);
-        alert("Login successful!");
-        window.location.href = "recipe-search.html"; // Redirect to Recipe Search page
+        window.location.href = "my-fridge.html";
     } catch (error) {
         console.error("Login error:", error.message);
-        alert(error.message);
+        alert("Failed to log in. Check your credentials.");
     }
 };
 
@@ -63,61 +90,43 @@ const login = async (email, password) => {
 const signOutUser = async () => {
     try {
         await signOut(auth);
-        alert("Sign-out successful!");
-        window.location.href = "login.html"; // Redirect to Login page
+        console.log("Sign-out successful!");
+        alert("Signed out successfully.");
+        window.location.href = "login.html"; // Redirect to login page after sign-out
     } catch (error) {
         console.error("Sign-out error:", error.message);
         alert(error.message);
     }
 };
-
 // Authentication State Observer
 const checkAuthState = () => {
     onAuthStateChanged(auth, (user) => {
-        const signupBtn = document.getElementById("signup-btn");
-        const loginBtn = document.getElementById("login-btn");
-        const recipesBtn = document.getElementById("recipes-btn");
-        const signOutBtn = document.getElementById("signOutButton");
+        const authButtons = document.getElementById("auth-buttons");
 
         if (user) {
-            // If user is logged in
-            if (signupBtn) signupBtn.style.display = "none";
-            if (loginBtn) loginBtn.style.display = "none";
-            if (recipesBtn) recipesBtn.style.display = "inline-block";
-            if (signOutBtn) signOutBtn.style.display = "inline-block";
+            console.log("User is logged in:", user.email);
+            // Hide the "Log In" and "Sign Up" buttons
+            if (authButtons) {
+                authButtons.style.display = "none";
+                console.log("Auth buttons hidden.");
+            }
         } else {
-            // If no user is logged in
-            if (signupBtn) signupBtn.style.display = "inline-block";
-            if (loginBtn) loginBtn.style.display = "inline-block";
-            if (recipesBtn) recipesBtn.style.display = "none";
-            if (signOutBtn) signOutBtn.style.display = "none";
+            console.log("No user is logged in.");
+            // Show the "Log In" and "Sign Up" buttons
+            if (authButtons) {
+                authButtons.style.display = "flex";
+                console.log("Auth buttons displayed.");
+            }
         }
     });
 };
 
-// Firestore Helper Functions
-const saveUserData = async (userId, data) => {
-    try {
-        await setDoc(doc(db, "users", userId), data);
-        console.log("User data saved successfully.");
-    } catch (error) {
-        console.error("Error saving user data:", error.message);
-    }
-};
 
-const readUserData = async (userId) => {
-    try {
-        const userRef = doc(db, "users", userId);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
-            return userSnap.data();
-        } else {
-            console.log("No such document!");
-        }
-    } catch (error) {
-        console.error("Error reading user data:", error.message);
-    }
-};
 
-// Export functions for use in other files
-export { signUp, login, signOutUser, checkAuthState, saveUserData, readUserData };
+// Export functions
+export {
+    signUp,
+    login,
+    signOutUser,
+    checkAuthState
+};

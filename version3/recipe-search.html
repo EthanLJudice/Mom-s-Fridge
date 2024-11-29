@@ -14,6 +14,9 @@
             --button-bg: #2e6d37;
             --button-hover-bg: #1f4b27;
             --input-bg: #fff;
+            --footer-bg: #2e6d37;
+            --modal-bg: #ffffff;
+            --modal-text-color: #333;
         }
 
         .dark-mode {
@@ -24,6 +27,9 @@
             --button-bg: #4c9a2a;
             --button-hover-bg: #3b7d21;
             --input-bg: #444;
+            --footer-bg: #4c9a2a;
+            --modal-bg: #2a2a2a;
+            --modal-text-color: #eaeaea;
         }
 
         body {
@@ -33,6 +39,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
@@ -51,13 +60,11 @@
         }
 
         .logo-title img {
-            height: 30px;
-            width: auto;
+            height: 40px;
         }
 
         .logo-title h1 {
             font-size: 28px;
-            color: var(--text-color);
             margin: 0;
         }
 
@@ -66,106 +73,83 @@
             padding: 0;
             margin: 0;
             display: flex;
-        }
-
-        nav ul li {
-            margin: 0 15px;
+            gap: 20px;
         }
 
         nav ul li a {
             text-decoration: none;
             color: var(--text-color);
             font-size: 18px;
-            font-weight: 600;
-            transition: color 0.3s ease;
         }
 
         nav ul li a:hover {
             color: var(--button-bg);
         }
 
-        .recipes-button {
-            background-color: var(--button-bg);
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            border: 2px solid var(--button-bg);
-            font-size: 14px;
+        .auth-buttons {
             display: flex;
-            align-items: center;
+            gap: 10px;
         }
 
-        .recipes-button:hover {
+        .auth-btn {
+            text-decoration: none;
+            color: white;
+            background-color: var(--button-bg);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .auth-btn:hover {
             background-color: var(--button-hover-bg);
-            border: 2px solid var(--button-hover-bg);
         }
 
-        main {
-            padding: 40px 20px;
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: var(--text-color);
+        .recipe-item {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
         }
 
         .search-container {
             display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
             justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         input[type="text"] {
             padding: 10px;
             font-size: 16px;
             width: 300px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            background-color: var(--input-bg);
-            color: var(--text-color);
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus {
-            border-color: var(--button-bg);
-            outline: none;
         }
 
         button {
             background-color: var(--button-bg);
             color: white;
             padding: 10px 20px;
-            border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
         }
 
-        button:hover {
-            background-color: var(--button-hover-bg);
-        }
-
-        .filters, .saved-results, .recipe-item {
-            background-color: var(--card-bg);
+        main {
+            flex: 1;
             padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
         }
 
         footer {
+            background-color: var(--footer-bg);
+            color: white;
             text-align: center;
             padding: 15px 20px;
-            background-color: #a6c0b5;  
             border-top: 1px solid var(--border-color);
-            position: fixed;
-            width: 100%;
-            bottom: 0;
         }
 
         .dark-mode-toggle {
@@ -174,6 +158,7 @@
             right: 20px;
             background: var(--button-bg);
             border: none;
+            color: white;
             width: 55px;
             height: 55px;
             border-radius: 50%;
@@ -188,52 +173,119 @@
         }
 
         .dark-mode-toggle:hover {
-            color: var(--button-bg);
+            background: var(--button-hover-bg);
         }
 
-        @media (max-width: 768px) {
-            .search-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            input[type="text"] {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-
-
-
-
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-                margin-top: 10px;
-            }
-
-            .auth-buttons {
-                margin-top: 20px;
-            }
-
-            .logo-title {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            main {
-                padding: 20px;
-            }
-
-
-
-
+        /* Modal styling */
+        .modal {
+            display: none; /* Hide the modal initially */
+            position: fixed;
+            top: 5%; /* Position the modal slightly below the top of the viewport */
+            left: 50%;
+            transform: translateX(-50%); /* Center the modal horizontally */
+            max-height: 90%; /* Ensure the modal never exceeds 90% of the viewport height */
+            overflow-y: auto; /* Add scrolling if content exceeds the modal's height */
+            background-color: var(--modal-bg);
+            color: var(--modal-text-color);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px; /* Add consistent padding inside the modal */
+            z-index: 1001;
+            width: 400px;
+            box-sizing: border-box; /* Ensure padding is included in the modal width */
+            flex-direction: column; /* Stack all elements vertically */
+            gap: 15px; /* Add space between elements */
         }
 
+        .modal.active {
+            display: flex; /* Show modal when active class is added */
+        }
+
+
+        .modal .button-group {
+            display: flex;
+            justify-content: flex-end; /* Align buttons to the right */
+            gap: 10px; /* Add space between buttons */
+            margin-top: auto; /* Push buttons to the bottom of the modal */
+        }
+
+        .modal textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg); /* Follows light/dark mode */
+            color: var(--modal-text-color); /* Follows light/dark mode */
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical; /* Allow resizing vertically */
+            min-height: 100px; /* Ensure a reasonable minimum height */
+            max-height: 200px; /* Prevent the textarea from growing too large */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+
+        .modal h3 {
+            margin: 0 0 20px; /* Add consistent spacing below the title */
+            font-size: 20px;
+        }
+
+        .modal label {
+            font-size: 14px;
+            margin: 10px 0 5px; /* Consistent spacing above and below the labels */
+            display: block;
+        }
+
+        .modal input {
+            width: 100%; /* Ensure inputs take full width of the modal */
+            padding: 10px;
+            margin: 5px 0 15px; /* Consistent spacing between elements */
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--input-bg);
+            color: var(--modal-text-color);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+        .modal button {
+            background-color: var(--button-bg); /* Match green theme */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal button:hover {
+            background-color: var(--button-hover-bg); /* Slightly darker green for hover */
+        }
+
+
+        .overlay {
+            display: none; /* Hide overlay initially */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block; /* Show modal and overlay when active */
+        }
+
+        .recipe-item img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -250,59 +302,199 @@
                 <li><a href="my-fridge.html">My Fridge</a></li>
             </ul>
         </nav>
-        <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
-        <a href="signup.html" class="recipes-button">Recipes (4)</a>
+        <div class="auth-buttons" id="auth-buttons">
+            <a href="login.html" class="auth-btn">Log In</a>
+            <a href="signup.html" class="auth-btn">Sign Up</a>
+            <button id="signOutButton" style="display: none;" onclick="signOutUser()">Sign Out</button>
+        </div>
     </header>
     <main>
         <h2>Search for Recipes</h2>
         <div class="search-container">
             <input type="text" id="ingredients" placeholder="Enter ingredients">
-            <button onclick="searchRecipes()">Search</button>
+            <button onclick="filterRecipes()">Search</button>
+            <button onclick="openModal()">Create Your Own Recipe</button>
         </div>
-        <div id="results"></div>
+        <div class="recipes-grid" id="recipesGrid">
+            <!-- Recipes will be dynamically populated here -->
+        </div>
     </main>
     <footer>
         <p>© 2024 Mom's Fridge</p>
     </footer>
-    <script>
-        // Dark Mode Toggle Script
-        document.addEventListener("DOMContentLoaded", () => {
-            const darkModeToggle = document.getElementById("darkModeToggle");
+    <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
 
-            // Check user's preference from localStorage
-            const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+    <!-- Modal for creating a recipe -->
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
+    <div class="modal" id="recipeModal">
+        <h3>Create Your Own Recipe</h3>
+        <label for="recipeName">Recipe Name</label>
+        <input type="text" id="recipeName" placeholder="Enter recipe name">
+        <label for="recipeIngredients">Ingredients (comma-separated)</label>
+        <input type="text" id="recipeIngredients" placeholder="Enter ingredients">
+        <label for="recipeDifficulty">Difficulty</label>
+        <input type="text" id="recipeDifficulty" placeholder="Easy, Medium, or Hard">
+        <label for="recipeTime">Preparation Time</label>
+        <input type="text" id="recipeTime" placeholder="e.g., 30 mins">
+        <label for="recipeInstructions">Instructions</label>
+        <textarea id="recipeInstructions" placeholder="Enter the steps comma-separated"></textarea>
+        <label for="recipeImage">Upload an Image</label>
+        <input type="file" id="recipeImage" accept="image/*">
+        <div class="button-group">
+            <button onclick="saveRecipe()">Save Recipe</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+    
+    <script type="module">
 
-            // Apply dark mode if it was previously enabled
-            if (isDarkMode) {
-                document.body.classList.add("dark-mode");
-                darkModeToggle.textContent = "☀️";
+
+        const checkAuthState = () => {
+        onAuthStateChanged(auth, (user) => {
+            const authButtons = document.querySelector(".auth-buttons"); // Ensure targeting correct element
+
+            if (user) {
+                console.log("User is logged in:", user.email);
+
+                // Hide login and signup buttons
+                if (authButtons) {
+                    authButtons.style.display = "none";
+                }
+
+                // Optionally, display a sign-out button or user greeting
+                const signOutButton = document.querySelector("#signOutButton");
+                if (signOutButton) {
+                    signOutButton.style.display = "inline-block";
+                }
+            } else {
+                console.log("No user is logged in.");
+
+                // Show login and signup buttons
+                if (authButtons) {
+                    authButtons.style.display = "flex";
+                }
+
+                // Hide sign-out button
+                const signOutButton = document.querySelector("#signOutButton");
+                if (signOutButton) {
+                    signOutButton.style.display = "none";
+                }
             }
+        });
+    };
 
-            // Toggle dark mode on button click
-            darkModeToggle.addEventListener("click", () => {
-                document.body.classList.toggle("dark-mode");
-                const darkModeEnabled = document.body.classList.contains("dark-mode");
+        const recipesGrid = document.getElementById("recipesGrid");
+        const recipeModal = document.getElementById("recipeModal");
+        const overlay = document.getElementById("overlay");
 
-                // Save user preference in localStorage
-                localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
+        function openModal() {
+            recipeModal.classList.add("active"); // Show modal
+            overlay.classList.add("active");    // Show overlay
+        }
 
-                // Update button icon
-                darkModeToggle.textContent = darkModeEnabled ? "☀️" : "🌙";
-            });
+        function closeModal() {
+            recipeModal.classList.remove("active"); // Hide modal
+            overlay.classList.remove("active");    // Hide overlay
+        }
+
+
+        async function fetchRecipes() {
+    try {
+        const response = await fetch('http://localhost:3000/api/recipes');
+        const recipes = await response.json();
+        console.log('Fetched Recipes:', recipes); // Debugging output
+        renderRecipes(recipes);
+    } catch (error) {
+        console.error('Error fetching recipes:', error);
+    }
+}
+
+function renderRecipes(recipes) {
+    console.log('Rendering Recipes:', recipes); // Debugging output
+    const recipesGrid = document.getElementById("recipesGrid");
+
+    if (!recipes || recipes.length === 0) {
+        recipesGrid.innerHTML = '<p>No recipes available.</p>';
+        return;
+    }
+
+    recipesGrid.innerHTML = recipes
+        .map(recipe => `
+            <div class="recipe-item" data-ingredients="${recipe.ingredients.join(",")}">
+                ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.name}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">` : ''}
+                <h3>${recipe.name}</h3>
+                <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
+                <p><strong>Prep Time:</strong> ${recipe.prepTime}</p>
+                <p><strong>Instructions:</strong><br>${recipe.instructions.replace(/,/g, '<br>')}</p>
+            </div>
+        `)
+        .join("");
+}
+
+
+        function saveRecipe() {
+            const name = document.getElementById("recipeName").value.trim();
+            const ingredients = document.getElementById("recipeIngredients").value.trim();
+            const difficulty = document.getElementById("recipeDifficulty").value.trim();
+            const prepTime = document.getElementById("recipeTime").value.trim();
+            const instructions = document.getElementById("recipeInstructions").value.trim();
+            const image = document.getElementById("recipeImage").files[0];
+
+            if (name && ingredients && difficulty && prepTime && instructions) {
+                const formData = new FormData();
+                formData.append("name", name);
+                formData.append("ingredients", ingredients);
+                formData.append("difficulty", difficulty);
+                formData.append("prepTime", prepTime);
+                formData.append("instructions", instructions);
+                if (image) {
+                    formData.append("image", image);
+                }
+
+                fetch('http://localhost:3000/api/save-recipe', {
+                    method: 'POST',
+                    body: formData, // Send as FormData
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Failed to save the recipe.');
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        alert(data.message);
+                        console.log('Image path on server:', data.imagePath);
+                        closeModal();
+                        fetchRecipes(); // Refresh recipes list
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('There was an error saving your recipe.');
+                    });
+            } else {
+                alert("All fields are required.");
+            }
+        }
+        fetchRecipes();
+
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const body = document.body;
+
+        const applyDarkMode = (isDark) => {
+            body.classList.toggle("dark-mode", isDark);
+            darkModeToggle.textContent = isDark ? "☀️" : "🌙";
+            localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+        };
+
+        const isDarkMode = localStorage.getItem("darkMode") === "enabled";
+        applyDarkMode(isDarkMode);
+
+        darkModeToggle.addEventListener("click", () => {
+            const isNowDarkMode = body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", isNowDarkMode ? "enabled" : "disabled");
+            darkModeToggle.textContent = isNowDarkMode ? "☀️" : "🌙";
         });
 
-        // Placeholder function for recipe search
-        function searchRecipes() {
-            const ingredients = document.getElementById("ingredients").value;
-            const results = document.getElementById("results");
-
-            if (ingredients.trim() === "") {
-                results.innerHTML = "<p>Please enter some ingredients to search for recipes.</p>";
-                return;
-            }
-
-            results.innerHTML = `<p>Searching recipes for: <strong>${ingredients}</strong>...</p>`;
-        }
     </script>
 </body>
 </html>

@@ -196,6 +196,8 @@
     <main>
         <h2>Sign Up</h2>
         <form id="signupForm">
+            <!--test-->
+
             <label for="username">Username:</label>
             <input type="text" id="username" placeholder="Enter your username" required><br>
             
@@ -215,6 +217,16 @@
     </footer>
 
     <script type="module">
+
+
+        import { checkAuthState } from "./firebase.js";
+
+        // Check authentication state on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            checkAuthState();
+        });
+
+
         import { signUp } from "./firebase.js"; // Import the sign-up function from firebase.js
 
         // Handle form submission and sign up logic

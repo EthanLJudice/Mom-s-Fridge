@@ -89,7 +89,8 @@
             background-color: #1f4b27;
         }
 
-        .recipes-button {
+        .recipes-button,
+        #logoutButton {
             background-color: #2e6d37;
             color: white;
             padding: 8px 15px;
@@ -100,7 +101,8 @@
             display: none; /* Hidden by default */
         }
 
-        .recipes-button:hover {
+        .recipes-button:hover,
+        #logoutButton:hover {
             background-color: #1f4b27;
             border: 2px solid #1f4b27;
         }
@@ -118,27 +120,26 @@
         }
 
         .dark-mode-toggle {
-            position: fixed; /* Fixed position ensures it stays in one spot */
-            bottom: 20px; /* Position from bottom */
-            right: 20px; /* Position from right */
-            background: #2e6d37; /* Background color */
-            border: none; /* Remove border */
-            color: white; /* Text color */
-            width: 50px; /* Ensure the button is a perfect circle */
-            height: 50px; /* Match width for circular shape */
-            padding: 0; /* No padding to ensure circular shape */
-            border-radius: 50%; /* Make it circular */
-            font-size: 24px; /* Adjust font size for better visibility */
-            cursor: pointer; /* Show pointer cursor */
-            z-index: 1000; /* Ensure it stays above other elements */
-            display: flex; /* Flexbox for centering the icon */
-            justify-content: center; /* Center icon horizontally */
-            align-items: center; /* Center icon vertically */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow for better visibility */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2e6d37;
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         .dark-mode-toggle:hover {
-            background: #1f4b27; /* Darker green on hover */
+            background: #1f4b27;
         }
     </style>
 </head>
@@ -161,6 +162,7 @@
             <a href="login.html" class="auth-btn">Login</a>
         </div>
         <a href="recipes.html" class="recipes-button" id="recipes-btn">Recipes (4)</a>
+        <button id="logoutButton">Logout</button>
     </header>
     <main>
         <h2>Find Recipes Based on Your Ingredients!</h2>
@@ -171,23 +173,16 @@
     </footer>
     <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
     <script type="module">
+    import { checkAuthState } from "./firebase.js";
+
+    // Check authentication state on page load
+    document.addEventListener("DOMContentLoaded", () => {
+        checkAuthState();
+    });
+
+
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-
-        const auth = getAuth();
-
-        // Update UI based on authentication state
-        onAuthStateChanged(auth, (user) => {
-            const authButtons = document.querySelectorAll(".auth-btn");
-            const recipesBtn = document.getElementById("recipes-btn");
-
-            if (user) {
-                authButtons.forEach((btn) => (btn.style.display = "none"));
-                recipesBtn.style.display = "inline-block";
-            } else {
-                authButtons.forEach((btn) => (btn.style.display = "inline-block"));
-                recipesBtn.style.display = "none";
-            }
-        });
+        import { logout } from "./firebase.js";
 
         // Dark mode logic
         const darkModeToggle = document.getElementById("darkModeToggle");
@@ -206,6 +201,8 @@
             const isNowDarkMode = !body.classList.contains("dark-mode");
             applyDarkMode(isNowDarkMode);
         });
+        import { checkAuthState } from "./firebase.js";
+    document.addEventListener("DOMContentLoaded", checkAuthState);
     </script>
 </body>
 </html>
