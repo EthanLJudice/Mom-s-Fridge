@@ -111,7 +111,7 @@ function searchRecipes() {
             difficulty: "Medium",
             prepTime: "20 mins",
             instructions: "1. Spread out broccoli in a medium rectangular casserole dish.\n2. Stir the garlic and cheddar cheese together in a separate bowl.\n3. Sprinkle the cheese evenly over broccoli and add salt and pepper to taste.\n4. Bake for 25 minutes then Enjoy."
-        },
+        }
     ];
 
     // Split and sanitize ingredients
