@@ -104,11 +104,13 @@
             background-color: var(--button-hover-bg);
         }
 
+        /* Grid Layout for Recipes */
         .recipes-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
         }
 
         .recipe-item {
@@ -116,6 +118,21 @@
             padding: 15px;
             border-radius: 5px;
             border: 1px solid var(--border-color);
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .recipe-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .recipe-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
         }
 
         .search-container {
@@ -202,7 +219,6 @@
             display: flex; /* Show modal when active class is added */
         }
 
-
         .modal .button-group {
             display: flex;
             justify-content: flex-end; /* Align buttons to the right */
@@ -225,7 +241,6 @@
             max-height: 200px; /* Prevent the textarea from growing too large */
             box-sizing: border-box; /* Include padding and border in width */
         }
-
 
         .modal h3 {
             margin: 0 0 20px; /* Add consistent spacing below the title */
@@ -266,7 +281,6 @@
             background-color: var(--button-hover-bg); /* Slightly darker green for hover */
         }
 
-
         .overlay {
             display: none; /* Hide overlay initially */
             position: fixed;
@@ -279,12 +293,7 @@
         }
 
         .overlay.active {
-            display: block; /* Show modal and overlay when active */
-        }
-
-        .recipe-item img {
-            max-width: 100%;
-            border-radius: 5px;
+            display: block; /* Show overlay when active class is added */
         }
     </style>
 </head>
