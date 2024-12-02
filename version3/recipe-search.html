@@ -347,91 +347,61 @@
     </div>
     
     <script type="module">
-
-
-        const checkAuthState = () => {
-        onAuthStateChanged(auth, (user) => {
-            const authButtons = document.querySelector(".auth-buttons"); // Ensure targeting correct element
-
-            if (user) {
-                console.log("User is logged in:", user.email);
-
-                // Hide login and signup buttons
-                if (authButtons) {
-                    authButtons.style.display = "none";
-                }
-
-                // Optionally, display a sign-out button or user greeting
-                const signOutButton = document.querySelector("#signOutButton");
-                if (signOutButton) {
-                    signOutButton.style.display = "inline-block";
-                }
-            } else {
-                console.log("No user is logged in.");
-
-                // Show login and signup buttons
-                if (authButtons) {
-                    authButtons.style.display = "flex";
-                }
-
-                // Hide sign-out button
-                const signOutButton = document.querySelector("#signOutButton");
-                if (signOutButton) {
-                    signOutButton.style.display = "none";
-                }
-            }
-        });
-    };
-
         const recipesGrid = document.getElementById("recipesGrid");
         const recipeModal = document.getElementById("recipeModal");
         const overlay = document.getElementById("overlay");
-
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const body = document.body;
+    
+        // Function to open the modal
         function openModal() {
-            recipeModal.classList.add("active"); // Show modal
-            overlay.classList.add("active");    // Show overlay
+            console.log("Opening modal...");
+            recipeModal.classList.add("active");
+            overlay.classList.add("active");
         }
-
+    
+        // Function to close the modal
         function closeModal() {
-            recipeModal.classList.remove("active"); // Hide modal
-            overlay.classList.remove("active");    // Hide overlay
+            console.log("Closing modal...");
+            recipeModal.classList.remove("active");
+            overlay.classList.remove("active");
         }
-
-
+    
+        // Fetch recipes from the API
         async function fetchRecipes() {
-    try {
-        const response = await fetch('http://localhost:3000/api/recipes');
-        const recipes = await response.json();
-        console.log('Fetched Recipes:', recipes); // Debugging output
-        renderRecipes(recipes);
-    } catch (error) {
-        console.error('Error fetching recipes:', error);
-    }
-}
-
-function renderRecipes(recipes) {
-    console.log('Rendering Recipes:', recipes); // Debugging output
-    const recipesGrid = document.getElementById("recipesGrid");
-
-    if (!recipes || recipes.length === 0) {
-        recipesGrid.innerHTML = '<p>No recipes available.</p>';
-        return;
-    }
-
-    recipesGrid.innerHTML = recipes
-        .map(recipe => `
-            <div class="recipe-item" data-ingredients="${recipe.ingredients.join(",")}">
-                ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.name}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">` : ''}
-                <h3>${recipe.name}</h3>
-                <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
-                <p><strong>Prep Time:</strong> ${recipe.prepTime}</p>
-                <p><strong>Instructions:</strong><br>${recipe.instructions.replace(/,/g, '<br>')}</p>
-            </div>
-        `)
-        .join("");
-}
-
-
+            try {
+                const response = await fetch('http://localhost:3000/api/recipes');
+                const recipes = await response.json();
+                console.log('Fetched Recipes:', recipes); // Debugging output
+                renderRecipes(recipes);
+            } catch (error) {
+                console.error('Error fetching recipes:', error);
+            }
+        }
+    
+        // Render fetched recipes
+        function renderRecipes(recipes) {
+            console.log('Rendering Recipes:', recipes); // Debugging output
+    
+            if (!recipes || recipes.length === 0) {
+                recipesGrid.innerHTML = '<p>No recipes available.</p>';
+                return;
+            }
+    
+            recipesGrid.innerHTML = recipes
+                .map(recipe => `
+                    <div class="recipe-item" data-ingredients="${recipe.ingredients.join(",")}">
+                        ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.name}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">` : ''}
+                        <h3>${recipe.name}</h3>
+                        <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
+                        <p><strong>Prep Time:</strong> ${recipe.prepTime}</p>
+                        <p><strong>Instructions:</strong><br>${recipe.instructions.replace(/,/g, '<br>')}</p>
+                    </div>
+                `)
+                .join("");
+        }
+    
+        // Save a new recipe
         function saveRecipe() {
             const name = document.getElementById("recipeName").value.trim();
             const ingredients = document.getElementById("recipeIngredients").value.trim();
@@ -439,7 +409,7 @@ function renderRecipes(recipes) {
             const prepTime = document.getElementById("recipeTime").value.trim();
             const instructions = document.getElementById("recipeInstructions").value.trim();
             const image = document.getElementById("recipeImage").files[0];
-
+    
             if (name && ingredients && difficulty && prepTime && instructions) {
                 const formData = new FormData();
                 formData.append("name", name);
@@ -450,10 +420,10 @@ function renderRecipes(recipes) {
                 if (image) {
                     formData.append("image", image);
                 }
-
+    
                 fetch('http://localhost:3000/api/save-recipe', {
                     method: 'POST',
-                    body: formData, // Send as FormData
+                    body: formData,
                 })
                     .then((response) => {
                         if (!response.ok) {
@@ -465,7 +435,7 @@ function renderRecipes(recipes) {
                         alert(data.message);
                         console.log('Image path on server:', data.imagePath);
                         closeModal();
-                        fetchRecipes(); // Refresh recipes list
+                        fetchRecipes();
                     })
                     .catch((error) => {
                         console.error('Error:', error);
@@ -475,26 +445,59 @@ function renderRecipes(recipes) {
                 alert("All fields are required.");
             }
         }
-        fetchRecipes();
-
-        const darkModeToggle = document.getElementById("darkModeToggle");
-        const body = document.body;
-
+    
+        // Handle dark mode
         const applyDarkMode = (isDark) => {
             body.classList.toggle("dark-mode", isDark);
             darkModeToggle.textContent = isDark ? "☀️" : "🌙";
             localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
         };
-
+    
         const isDarkMode = localStorage.getItem("darkMode") === "enabled";
         applyDarkMode(isDarkMode);
-
+    
         darkModeToggle.addEventListener("click", () => {
             const isNowDarkMode = body.classList.toggle("dark-mode");
             localStorage.setItem("darkMode", isNowDarkMode ? "enabled" : "disabled");
             darkModeToggle.textContent = isNowDarkMode ? "☀️" : "🌙";
         });
-
+    
+        // Fetch recipes on page load
+        fetchRecipes();
+    
+        // Log authentication state changes
+        const checkAuthState = () => {
+            onAuthStateChanged(auth, (user) => {
+                const authButtons = document.querySelector(".auth-buttons");
+    
+                if (user) {
+                    console.log("User is logged in:", user.email);
+    
+                    if (authButtons) {
+                        authButtons.style.display = "none";
+                    }
+    
+                    const signOutButton = document.querySelector("#signOutButton");
+                    if (signOutButton) {
+                        signOutButton.style.display = "inline-block";
+                    }
+                } else {
+                    console.log("No user is logged in.");
+    
+                    if (authButtons) {
+                        authButtons.style.display = "flex";
+                    }
+    
+                    const signOutButton = document.querySelector("#signOutButton");
+                    if (signOutButton) {
+                        signOutButton.style.display = "none";
+                    }
+                }
+            });
+        };
+    
+        checkAuthState();
     </script>
+    
 </body>
 </html>
