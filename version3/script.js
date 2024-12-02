@@ -77,6 +77,41 @@ function searchRecipes() {
             prepTime: "15 mins",
             instructions: "1. Place a rack in center of oven; preheat to 400°. Grease a large baking sheet with cooking spray.\n2. In a large bowl, mix eggs, bread crumbs, milk, Italian seasoning, salt, pepper, garlic powder, and onion powder with a rubber spatula until a wet paste forms.\n3. Using clean hands, mix ground beef into egg mixture until thoroughly combined.\n4. Bake meatballs until browned and cooked through then serve."
         },
+         {
+            name: "Ranch Spinach Dip",
+            ingredients: ["sour cream", "frozen spinach", "water chestnuts", "ranch seasoning"],
+            difficulty: "Easy",
+            prepTime: "15 mins",
+            instructions: "1. In a large bowl, mix the sour cream together with the dips mix until well-blended.\n2. Fold in spinach and water chestnuts.\n3. Chill covered for 1 hour before serving.\n4. Serve with chips of your choice."
+        },
+         {
+            name: "Chocolate Avocado Smoothie",
+            ingredients: ["avocado", "banana", "chocolate milk"],
+            difficulty: "Easy",
+            prepTime: "3-5 mins",
+            instructions: "1. Add avocado, banana, and chocolate milk to blender and blend until smooth.\n2. Pour into glass and enjoy!"
+        },
+         {
+            name: "Teriyaki Chicken",
+            ingredients: ["boneless chicken thighs", "soy sauce", "brown sugar"],
+            difficulty: "Easy",
+            prepTime: "10 mins",
+            instructions: "1. Heat a large nonstick pan over medium-high heat. Add the chicken and sear until golden brown on both sides.\n2. Add the soy sauce and brown sugar and stir to combine, then bring to a boil. Cook until the sauce reduces and coats the chicken.\n3. Serve with rice and enjoy."
+        },
+        {
+            name: "Creme Brulee",
+            ingredients: ["vanilla ice cream", "1 egg yolk", "sugar"],
+            difficulty: "Hard",
+            prepTime: "At least 60 mins",
+            instructions: "1. Preheat the oven to 325˚F.\n2. Scoop the ice cream in a microwave-safe bowl. Microwave the ice cream for 30-40 seconds, or until completely melted. Allow to cool for 5 minutes.\n3. Add the egg yolk to the melted ice cream and whisk well.\n4. Bake for 40-50 minutes. The crème brûlée should be set, but still a little jiggly in the middle. Remove the ramekin from the roasting pan, allow to cool to room temperature, cover with plastic wrap, and refrigerate for at least 2 hours, and up to 3 days.\n5. Sprinkle a tablespoon of sugar on top of each crème brûlée. Using a torch, melt the sugar to for a crispy top. If you don’t have a torch, you can broil the crème brûlée to melt the sugar. Keep an eye on it to make sure you don’t over cook it. Allow the crème brûlée to sit for at least 5 minutes before serving. Enjoy."
+        },
+        {
+            name: "Cheesy Garlic Broccoli",
+            ingredients: ["broccoli crowns", "shredded cheddar cheese", "garlic", "salt", "pepper"],
+            difficulty: "Medium",
+            prepTime: "20 mins",
+            instructions: "1. Spread out broccoli in a medium rectangular casserole dish.\n2. Stir the garlic and cheddar cheese together in a separate bowl.\n3. Sprinkle the cheese evenly over broccoli and add salt and pepper to taste.\n4. Bake for 25 minutes then Enjoy."
+        }
     ];
 
     // Split and sanitize ingredients
