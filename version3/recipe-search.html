@@ -346,7 +346,33 @@
         </div>
     </div>
     
-    <script type="module">
+    <script>
+function filterRecipes() {
+            const ingredientsInput = document.getElementById("ingredients").value.trim().toLowerCase();
+            const recipeItems = document.querySelectorAll(".recipe-item");
+
+            // If no input is provided, show an alert and reset all recipes to visible
+            if (!ingredientsInput) {
+                alert("Please enter ingredients to filter the recipes.");
+                recipeItems.forEach(recipe => {
+                    recipe.style.display = "block"; // Reset to visible
+                });
+                return;
+            }
+
+            // Filter recipes based on ingredients
+            recipeItems.forEach(recipe => {
+                const recipeIngredients = recipe.dataset.ingredients.toLowerCase();
+
+                // Check if the input ingredient matches any recipe's ingredients
+                if (recipeIngredients.includes(ingredientsInput)) {
+                    recipe.style.display = "block"; // Show matching recipes
+                } else {
+                    recipe.style.display = "none"; // Hide non-matching recipes
+                }
+            });
+        }
+
         const recipesGrid = document.getElementById("recipesGrid");
         const recipeModal = document.getElementById("recipeModal");
         const overlay = document.getElementById("overlay");
