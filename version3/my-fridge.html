@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Fridge - Mom's Fridge</title>
+    <title>User Profile - Mom's Fridge</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         :root {
@@ -42,36 +42,6 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-        }
-
-        .recipes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            justify-content: center;
-        }
-
-        .recipe-item {
-            background-color: var(--card-bg);
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: border-color 0.3s ease;
-        }
-
-        .recipe-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .recipe-item h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
         }
 
         header {
@@ -134,33 +104,25 @@
             background-color: var(--button-hover-bg);
         }
 
-        main {
-            flex: 1;
+        /* Profile content */
+        .profile-content {
+            background-color: var(--card-bg);
             padding: 20px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: border-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 30px;
         }
 
-        h2 {
-            font-size: 32px;
+        .profile-content h2 {
+            font-size: 24px;
             margin-bottom: 20px;
         }
 
-        .fridge-content {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .fridge-content h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        #savedRecipes {
-            margin-top: 10px;
+        .profile-content p {
             font-size: 16px;
-            color: var(--text-color);
         }
 
         footer {
@@ -195,12 +157,11 @@
             background: var(--button-hover-bg);
         }
 
-        /* Media Queries for Responsiveness */
+        /* Responsive Design */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 15px;
             }
 
             nav ul {
@@ -208,12 +169,13 @@
                 margin-top: 10px;
             }
 
-            .logo-title h1 {
-                font-size: 24px;
+            nav ul li {
+                margin: 5px 0;
             }
 
-            .auth-buttons {
-                margin-top: 10px;
+            .profile-content {
+                padding: 15px;
+                margin: 20px;
             }
         }
     </style>
