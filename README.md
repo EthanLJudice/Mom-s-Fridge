@@ -16,6 +16,12 @@ Guido Fajardo:
     Create your own Recipe,
     Node.js, 
     and Server.js
+Thomas Miller
+    Implemented initial functionality (later improved by Guido)
+    Implemented main design 
+    about page
+    profile page
+    index page
 
 # Implementation Details
 
