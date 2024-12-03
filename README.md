@@ -22,7 +22,7 @@ A consise user interface that streamlines the use of the program to the user.<br
 Recipe Image Storage Website
 This project is a Node.js-based application that provides functionality for uploading and storing images related to recipes. The application includes a backend server to handle image storage and a frontend interface that can be launched in a browser.
 
-Setup Instructions
+# Setup Instructions
 1. Download the Repository
 Go to the GitHub page for this repository.
 Click the green "Code" button.
@@ -32,7 +32,7 @@ Save the ZIP file to your computer and extract it to a folder of your choice.
 Download Node.js from the official website and follow the installation instructions for your operating system.
 After installation, verify that Node.js and npm (Node Package Manager) are installed by opening your terminal/command prompt and running:
 bash
-Copy code
+ 
 node -v
 npm -v
 You should see version numbers for both commands.
@@ -40,22 +40,22 @@ You should see version numbers for both commands.
 Open the terminal/command prompt.
 Navigate to the extracted project folder using the cd command:
 bash
-Copy code
+ 
 cd /path/to/your/project-folder
 Install the required dependencies by running:
 bash
-Copy code
+ 
 npm install
 This command will install all packages listed in the package.json file.
 4. Start the Node.js Server
 Locate the main server file in the project directory, typically named server.js or app.js.
 Start the server by running:
 bash
-Copy code
+ 
 node server.js
 Once the server is running, you should see a message like:
 arduino
-Copy code
+ 
 Server running on http://localhost:3000
 Replace 3000 with the actual port number if specified in the project.
 5. Launch the Frontend
@@ -77,7 +77,7 @@ Node.js Backend: Handles image upload and retrieval.
 Frontend: Simple interface for user interaction.
 Folder Structure
 bash
-Copy code
+ 
 project/
 │
 ├── uploads/            # Stores uploaded images
@@ -91,26 +91,26 @@ To ensure smooth operation, the following dependencies are used:
 
 Express: For creating the backend server.
 bash
-Copy code
+ 
 npm install express
 Multer: For handling file uploads.
 bash
-Copy code
+ 
 npm install multer
 Dotenv: For managing environment variables.
 bash
-Copy code
+ 
 npm install dotenv
 These dependencies are automatically installed when you run npm install.
 
 Common Commands
 Start the Server:
 bash
-Copy code
+ 
 node server.js
 Install a New Dependency:
 bash
-Copy code
+ 
 npm install <dependency-name>
 Troubleshooting
 Port Already in Use:
@@ -124,5 +124,5 @@ Node.js Errors:
 
 Check if all dependencies are installed by running:
 bash
-Copy code
+ 
 npm install
