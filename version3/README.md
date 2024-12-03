@@ -16,8 +16,7 @@ Guido Fajardo:
     Create your own Recipe,
     Node.js, 
     and Server.js
-    
-    Jackson Buhrer: 
+Jackson Buhrer: 
     Created most of the recipes for the recipe search. Added the steps for them since I have cooking experience. Added pictures for the recipes.
 
 # Implementation Details
