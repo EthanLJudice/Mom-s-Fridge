@@ -14,8 +14,8 @@ Guido Fajardo:
     Dark and Light mode,
     Recipe Search bar,
     Create your own Recipe,
-    Node.js,
-    Server.js,
+    Node.js, 
+    and Server.js
 
 # Implementation Details
 
