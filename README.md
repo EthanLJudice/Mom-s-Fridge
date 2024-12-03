@@ -1,11 +1,11 @@
 # Mom-s-Fridge
 CSC 4330 Group Project
 Members:
-Ethan Judice \n
-Thomas Miller
-Skyler Dowling
-Jackson Buhrer
-Guido Fajaro
+Ethan Judice,
+Thomas Miller,
+Skyler Dowling,
+Jackson Buhrer,
+and Guido Fajaro
 
 
 # Implementation Details
