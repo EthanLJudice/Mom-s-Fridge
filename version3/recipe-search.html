@@ -424,18 +424,79 @@ function filterRecipes() {
             }
     
             recipesGrid.innerHTML = recipes
-                .map(recipe => `
-                    <div class="recipe-item" data-ingredients="${recipe.ingredients.join(",")}">
-                        ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.name}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">` : ''}
-                        <h3>${recipe.name}</h3>
-                        <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
-                        <p><strong>Prep Time:</strong> ${recipe.prepTime}</p>
-                        <p><strong>Instructions:</strong><br>${recipe.instructions.replace(/,/g, '<br>')}</p>
-                    </div>
-                `)
-                .join("");
+        .map(recipe => `
+            <div class="recipe-item"
+                 data-recipe-name="${recipe.name}"
+                 data-recipe-ingredients="${recipe.ingredients.join(",")}"
+                 data-recipe-difficulty="${recipe.difficulty}"
+                 data-recipe-prepTime="${recipe.prepTime}" 
+                 data-recipe-instructions="${recipe.instructions}">
+                ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.name}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">` : ''}
+                <h3>${recipe.name}</h3>
+                <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
+                <p><strong>PrepTime:</strong> ${recipe.prepTime}</p>
+                <p><strong>Instructions:</strong><br>${recipe.instructions.replace(/,/g, '<br>')}</p>
+                <button class="save-btn">Save</button> <!-- Save button -->
+            </div>
+        `)
+        .join("");
+            const saveButtons = document.querySelectorAll('.save-btn');
+            saveButtons.forEach(button => {
+            button.addEventListener('click', function() {
+            saveRecipeFromCard(button);
+        });
+    });
         }
+
+
+
+        // Function to handle saving the recipe from the card
+    function saveRecipeFromCard(button) {
+    // Get the closest parent element with the class 'recipe-item' which contains the data attributes
+    const recipeCard = button.closest('.recipe-item');
     
+    // Retrieve data from the recipe card
+    const name = recipeCard.dataset.recipeName;
+    const ingredients = recipeCard.dataset.recipeIngredients;
+    const difficulty = recipeCard.dataset.recipeDifficulty;
+    const prepTime = recipeCard.dataset.recipePreptime;
+    const instructions = recipeCard.dataset.recipeInstructions;
+
+        // Retrieve the image path (from the image element inside the recipe card)
+        const image = recipeCard.querySelector('img') ? recipeCard.querySelector('img').src : null; // Get image URL
+
+        console.log(image)
+
+    // Add image path to the dataset (you can choose how you want to store it)
+
+  
+        // Construct the recipe data as a string (for plain text file saving)
+        const recipeData = `${name}|${ingredients}|${difficulty}|${prepTime}|instructions: "${instructions}"|image: "${image}"\n`;
+     
+          // Send the recipe data to the server to be saved in the text file
+    fetch('http://localhost:3000/api/save-favorite-recipe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ recipeData }) // Send the recipe data to the server
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Recipe saved successfully!');
+        console.log('Server response:', data);
+    })
+    .catch(error => {
+        console.error('Error saving recipe:', error);
+        alert('There was an error saving your recipe.');
+    });
+
+
+        
+}
+
+
+
         // Save a new recipe
         function saveRecipe() {
             const name = document.getElementById("recipeName").value.trim();
@@ -461,13 +522,14 @@ function filterRecipes() {
                     body: formData,
                 })
                     .then((response) => {
+                        console.log(response)
                         if (!response.ok) {
                             throw new Error('Failed to save the recipe.');
                         }
                         return response.json();
                     })
                     .then((data) => {
-                        alert(data.message);
+                        alert(response);
                         console.log('Image path on server:', data.imagePath);
                         closeModal();
                         fetchRecipes();
@@ -536,3 +598,4 @@ function filterRecipes() {
     
 </body>
 </html>
+

@@ -34,6 +34,36 @@
             transition: background-color var(--transition-speed);
         }
 
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .recipe-item {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .recipe-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .recipe-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
         header {
             display: flex;
             justify-content: space-between;
@@ -213,8 +243,8 @@
         <h2>My Fridge</h2>
         <div class="fridge-content">
             <h3>Saved Recipes</h3>
-            <div id="savedRecipes">
-                Saved recipes will be displayed here.
+            <div class="recipes-grid" id="recipesGrid">
+                <!-- Recipes will be dynamically populated here -->
             </div>
         </div>
     </main>
@@ -222,7 +252,65 @@
         <p>© 2024 Mom's Fridge</p>
     </footer>
     <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
+
+
+
     <script >
+
+        async function fetchRecipes() {
+            try {
+                const response = await fetch('http://localhost:3000/api/favorite-recipes');
+                const recipes = await response.json();
+                console.log('Fetched Recipes:', recipes); // Debugging output
+                renderRecipes(recipes);
+            } catch (error) {
+                console.error('Error fetching recipes:', error);
+            }
+        }
+
+        function renderRecipes(recipes) {
+    console.log('Rendering Recipes:', recipes); // Debugging output
+
+    if (!recipes || recipes.length === 0) {
+        recipesGrid.innerHTML = '<p>No recipes available.</p>';
+        return;
+    }
+
+    recipesGrid.innerHTML = recipes.map(recipe => `
+        <div class="recipe-item"
+             data-recipe-name="${recipe.name}"
+             data-recipe-ingredients="${recipe.ingredients.join(", ")}"
+             data-recipe-difficulty="${recipe.difficulty}"
+             data-recipe-prepTime="${recipe.prepTime}"
+             data-recipe-instructions="${recipe.instructions}">
+            ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.name}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">` : ''}
+            <h3>${recipe.name}</h3>
+            <p><strong>Ingredients:</strong> ${recipe.ingredients.join(", ")}</p>
+            <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
+            <p><strong>Prep Time:</strong> ${recipe.prepTime} minutes</p>
+            <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+        </div>
+    `).join("");
+
+    const saveButtons = document.querySelectorAll('.save-btn');
+    saveButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            saveRecipeFromCard(button);
+        });
+    });
+}
+
+
+
+
+
+
+        fetchRecipes();
+
+
+
+
+
         document.addEventListener("DOMContentLoaded", () => {
             const darkModeToggle = document.getElementById("darkModeToggle");
 

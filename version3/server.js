@@ -93,6 +93,62 @@ app.post('/api/save-recipe', upload.single('image'), (req, res) => {
     });
 });
 
+
+
+app.post('/api/save-favorite-recipe', (req, res) => {
+    const { recipeData } = req.body;
+
+    if (!recipeData) {
+        console.error('Missing recipe data:', req.body);
+        return res.status(400).json({ error: 'No recipe data provided!' });
+    }
+
+    // Define the path to the saved recipes file
+    const filePath = path.join(__dirname, 'saved_recipes.txt');
+
+    // Append the recipe data to the file
+    fs.appendFile(filePath, recipeData, (err) => {
+        if (err) {
+            console.error('Failed to save the recipe to file:', err);
+            return res.status(500).json({ error: 'Failed to save the recipe to file.' });
+        }
+
+        console.log('Recipe data saved to saved_recipes.txt');
+        res.status(200).json({ message: 'Recipe saved to file successfully!' });
+    });
+});
+
+
+// Route to fetch recipes
+app.get('/api/favorite-recipes', (req, res) => {
+    fs.readFile('version3/saved_recipes.txt', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Failed to read recipes:', err);
+            return res.status(500).json({ error: 'Failed to fetch recipes.' });
+        }
+
+        const recipes = data
+            ? data.trim().split('\n').map(line => {
+                  const [name, ingredients, difficulty, prepTime, instructionsPart, imagePart] = line.split('|');
+                  const instructions = instructionsPart?.split(': ')[1]?.replace(/"/g, '').trim() || '';
+                  const image = imagePart?.split(': ')[1]?.replace(/"/g, '').trim() || '';
+
+                  return {
+                      name: name?.trim() || 'Unnamed Recipe',
+                      ingredients: ingredients?.split(',').map(item => item.trim()) || [],
+                      difficulty: difficulty?.trim() || 'Unknown',
+                      prepTime: prepTime?.trim() || 'Unknown',
+                      instructions,
+                      image,
+                  };
+              })
+            : [];
+
+        res.json(recipes);
+    });
+});
+
+
 // Serve static files (if needed)
 app.use(express.static('public'));
 
