@@ -11,9 +11,12 @@
             --border-color: #ddd;
             --card-bg: #f4f4f4;
             --text-color: #333;
-            --accent-color: #2e6d37;
-            --button-hover: #1f4b27;
-            --transition-speed: 0.3s;
+            --button-bg: #2e6d37;
+            --button-hover-bg: #1f4b27;
+            --input-bg: #fff;
+            --footer-bg: #2e6d37;
+            --modal-bg: #ffffff;
+            --modal-text-color: #333;
         }
 
         .dark-mode {
@@ -21,17 +24,24 @@
             --border-color: #333;
             --card-bg: #2a2a2a;
             --text-color: #eaeaea;
-            --accent-color: #5a9a60;
-            --button-hover: #3e7c43;
+            --button-bg: #4c9a2a;
+            --button-hover-bg: #3b7d21;
+            --input-bg: #444;
+            --footer-bg: #4c9a2a;
+            --modal-bg: #2a2a2a;
+            --modal-text-color: #eaeaea;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: var(--header-bg);
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            transition: background-color var(--transition-speed);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .recipes-grid {
@@ -68,28 +78,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
+            padding: 20px 30px;
             background-color: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
-            transition: background-color var(--transition-speed);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .logo-title {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .logo-title img {
-            height: 30px;
-            width: auto;
+            height: 40px;
         }
 
         .logo-title h1 {
             font-size: 28px;
-            color: var(--text-color);
             margin: 0;
-            font-weight: 600;
         }
 
         nav ul {
@@ -103,13 +109,11 @@
         nav ul li a {
             text-decoration: none;
             color: var(--text-color);
-            font-size: 16px;
-            font-weight: 500;
-            transition: color var(--transition-speed);
+            font-size: 18px;
         }
 
         nav ul li a:hover {
-            color: var(--accent-color);
+            color: var(--button-bg);
         }
 
         .auth-buttons {
@@ -120,22 +124,19 @@
         .auth-btn {
             text-decoration: none;
             color: white;
-            background-color: var(--accent-color);
-            padding: 10px 20px;
+            background-color: var(--button-bg);
+            padding: 8px 15px;
             border-radius: 5px;
             font-size: 14px;
-            transition: background-color var(--transition-speed);
         }
 
         .auth-btn:hover {
-            background-color: var(--button-hover);
+            background-color: var(--button-hover-bg);
         }
 
- 
         main {
-            padding: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            flex: 1;
+            padding: 20px;
         }
 
         h2 {
@@ -163,37 +164,35 @@
         }
 
         footer {
+            background-color: var(--footer-bg);
+            color: white;
             text-align: center;
-            padding: 15px 0;
-            background-color: #a6c0b5; 
+            padding: 15px 20px;
             border-top: 1px solid var(--border-color);
-            font-size: 14px;
-            color: var(--text-color);
-            transition: background-color var(--transition-speed);
         }
 
         .dark-mode-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--accent-color);
+            background: var(--button-bg);
             border: none;
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color var(--transition-speed);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
         }
 
         .dark-mode-toggle:hover {
-            background: var(--button-hover);
+            background: var(--button-hover-bg);
         }
 
         /* Media Queries for Responsiveness */
@@ -213,9 +212,8 @@
                 font-size: 24px;
             }
 
-            .recipes-button {
-                display: inline-block;
-                margin-top: 15px;
+            .auth-buttons {
+                margin-top: 10px;
             }
         }
     </style>
