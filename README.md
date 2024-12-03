@@ -7,9 +7,17 @@ Skyler Dowling,<br />
 Jackson Buhrer,<br />
 and Guido Fajaro<br />
 
+# Contributions
+
+Guido Fajardo:
+    Login - Sign up (firebase.js),
+    Dark and Light mode,
+    Recipe Search bar,
+    Create your own Recipe,
+    Node.js, 
+    and Server.js
 
 # Implementation Details
-
 
 # Core Features
 The website will ask the user to input a list of ingredients based on what's in their fridge or pantry and output a series of recipes that include those ingredients.<br />
