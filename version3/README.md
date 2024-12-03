@@ -10,12 +10,12 @@ and Guido Fajaro<br />
 # Contributions
 
 Guido Fajardo:
-    Login - Sign up (firebase.js)
-    Dark and Light mode
-    Recipe Search bar
-    Create your own Recipe
-    Node.js
-    Server.js
+    Login - Sign up (firebase.js),
+    Dark and Light mode,
+    Recipe Search bar,
+    Create your own Recipe,
+    Node.js,
+    Server.js,
 
 # Implementation Details
 
