@@ -11,6 +11,10 @@
             --border-color: #ddd;
             --card-bg: #f4f4f4;
             --text-color: #333;
+            --button-bg: #2e6d37;
+            --button-hover-bg: #1f4b27;
+            --input-bg: #fff;
+            --footer-bg: #2e6d37;
         }
 
         .dark-mode {
@@ -18,6 +22,10 @@
             --border-color: #333;
             --card-bg: #2a2a2a;
             --text-color: #eaeaea;
+            --button-bg: #4c9a2a;
+            --button-hover-bg: #3b7d21;
+            --input-bg: #444;
+            --footer-bg: #4c9a2a;
         }
 
         body {
@@ -26,15 +34,18 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 20px 30px;
             background-color: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .logo-title {
@@ -44,13 +55,11 @@
         }
 
         .logo-title img {
-            height: 24px;
-            width: auto;
+            height: 40px;
         }
 
         .logo-title h1 {
-            font-size: 24px;
-            color: var(--text-color);
+            font-size: 28px;
             margin: 0;
         }
 
@@ -59,16 +68,17 @@
             padding: 0;
             margin: 0;
             display: flex;
-        }
-
-        nav ul li {
-            margin: 0 15px;
+            gap: 20px;
         }
 
         nav ul li a {
             text-decoration: none;
             color: var(--text-color);
-            font-size: 16px;
+            font-size: 18px;
+        }
+
+        nav ul li a:hover {
+            color: var(--button-bg);
         }
 
         .auth-buttons {
@@ -79,43 +89,45 @@
         .auth-btn {
             text-decoration: none;
             color: white;
-            background-color: #2e6d37;
+            background-color: var(--button-bg);
             padding: 8px 15px;
             border-radius: 5px;
             font-size: 14px;
         }
 
         .auth-btn:hover {
-            background-color: #1f4b27;
+            background-color: var(--button-hover-bg);
         }
 
         .recipes-button,
         #logoutButton {
-            background-color: #2e6d37;
+            background-color: var(--button-bg);
             color: white;
             padding: 8px 15px;
             text-decoration: none;
             border-radius: 5px;
-            border: 2px solid #2e6d37;
+            border: 2px solid var(--button-bg);
             font-size: 14px;
-            display: none; /* Hidden by default */
+            display: none;
         }
 
         .recipes-button:hover,
         #logoutButton:hover {
-            background-color: #1f4b27;
-            border: 2px solid #1f4b27;
+            background-color: var(--button-hover-bg);
+            border: 2px solid var(--button-hover-bg);
         }
 
         main {
+            flex: 1;
             padding: 20px;
             text-align: center;
         }
 
         footer {
+            background-color: var(--footer-bg);
+            color: white;
             text-align: center;
-            padding: 10px 0;
-            background-color: var(--header-bg);
+            padding: 15px 20px;
             border-top: 1px solid var(--border-color);
         }
 
@@ -123,24 +135,26 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #2e6d37;
+            background: var(--button-bg);
             border: none;
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
         }
 
         .dark-mode-toggle:hover {
-            background: #1f4b27;
+            background: var(--button-hover-bg);
         }
+
     </style>
 </head>
 <body>

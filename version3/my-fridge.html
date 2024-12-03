@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Fridge - Mom's Fridge</title>
+    <title>User Profile - Mom's Fridge</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         :root {
@@ -11,9 +11,12 @@
             --border-color: #ddd;
             --card-bg: #f4f4f4;
             --text-color: #333;
-            --accent-color: #2e6d37;
-            --button-hover: #1f4b27;
-            --transition-speed: 0.3s;
+            --button-bg: #2e6d37;
+            --button-hover-bg: #1f4b27;
+            --input-bg: #fff;
+            --footer-bg: #2e6d37;
+            --modal-bg: #ffffff;
+            --modal-text-color: #333;
         }
 
         .dark-mode {
@@ -21,45 +24,48 @@
             --border-color: #333;
             --card-bg: #2a2a2a;
             --text-color: #eaeaea;
-            --accent-color: #5a9a60;
-            --button-hover: #3e7c43;
+            --button-bg: #4c9a2a;
+            --button-hover-bg: #3b7d21;
+            --input-bg: #444;
+            --footer-bg: #4c9a2a;
+            --modal-bg: #2a2a2a;
+            --modal-text-color: #eaeaea;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: var(--header-bg);
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            transition: background-color var(--transition-speed);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
+            padding: 20px 30px;
             background-color: var(--header-bg);
-            border-bottom: 1px solid var(--border-color);
-            transition: background-color var(--transition-speed);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .logo-title {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .logo-title img {
-            height: 30px;
-            width: auto;
+            height: 40px;
         }
 
         .logo-title h1 {
             font-size: 28px;
-            color: var(--text-color);
             margin: 0;
-            font-weight: 600;
         }
 
         nav ul {
@@ -73,13 +79,11 @@
         nav ul li a {
             text-decoration: none;
             color: var(--text-color);
-            font-size: 16px;
-            font-weight: 500;
-            transition: color var(--transition-speed);
+            font-size: 18px;
         }
 
         nav ul li a:hover {
-            color: var(--accent-color);
+            color: var(--button-bg);
         }
 
         .auth-buttons {
@@ -90,88 +94,74 @@
         .auth-btn {
             text-decoration: none;
             color: white;
-            background-color: var(--accent-color);
-            padding: 10px 20px;
+            background-color: var(--button-bg);
+            padding: 8px 15px;
             border-radius: 5px;
             font-size: 14px;
-            transition: background-color var(--transition-speed);
         }
 
         .auth-btn:hover {
-            background-color: var(--button-hover);
+            background-color: var(--button-hover-bg);
         }
 
- 
-        main {
-            padding: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Profile content */
+        .profile-content {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: border-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 30px;
         }
 
-        h2 {
-            font-size: 32px;
+        .profile-content h2 {
+            font-size: 24px;
             margin-bottom: 20px;
         }
 
-        .fridge-content {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .fridge-content h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        #savedRecipes {
-            margin-top: 10px;
+        .profile-content p {
             font-size: 16px;
-            color: var(--text-color);
         }
 
         footer {
+            background-color: var(--footer-bg);
+            color: white;
             text-align: center;
-            padding: 15px 0;
-            background-color: #a6c0b5; 
+            padding: 15px 20px;
             border-top: 1px solid var(--border-color);
-            font-size: 14px;
-            color: var(--text-color);
-            transition: background-color var(--transition-speed);
         }
 
         .dark-mode-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--accent-color);
+            background: var(--button-bg);
             border: none;
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color var(--transition-speed);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
         }
 
         .dark-mode-toggle:hover {
-            background: var(--button-hover);
+            background: var(--button-hover-bg);
         }
 
-        /* Media Queries for Responsiveness */
+        /* Responsive Design */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 15px;
             }
 
             nav ul {
@@ -179,13 +169,13 @@
                 margin-top: 10px;
             }
 
-            .logo-title h1 {
-                font-size: 24px;
+            nav ul li {
+                margin: 5px 0;
             }
 
-            .recipes-button {
-                display: inline-block;
-                margin-top: 15px;
+            .profile-content {
+                padding: 15px;
+                margin: 20px;
             }
         }
     </style>
@@ -213,8 +203,8 @@
         <h2>My Fridge</h2>
         <div class="fridge-content">
             <h3>Saved Recipes</h3>
-            <div id="savedRecipes">
-                Saved recipes will be displayed here.
+            <div class="recipes-grid" id="recipesGrid">
+                <!-- Recipes will be dynamically populated here -->
             </div>
         </div>
     </main>
@@ -222,7 +212,65 @@
         <p>© 2024 Mom's Fridge</p>
     </footer>
     <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
+
+
+
     <script >
+
+        async function fetchRecipes() {
+            try {
+                const response = await fetch('http://localhost:3000/api/favorite-recipes');
+                const recipes = await response.json();
+                console.log('Fetched Recipes:', recipes); // Debugging output
+                renderRecipes(recipes);
+            } catch (error) {
+                console.error('Error fetching recipes:', error);
+            }
+        }
+
+        function renderRecipes(recipes) {
+    console.log('Rendering Recipes:', recipes); // Debugging output
+
+    if (!recipes || recipes.length === 0) {
+        recipesGrid.innerHTML = '<p>No recipes available.</p>';
+        return;
+    }
+
+    recipesGrid.innerHTML = recipes.map(recipe => `
+        <div class="recipe-item"
+             data-recipe-name="${recipe.name}"
+             data-recipe-ingredients="${recipe.ingredients.join(", ")}"
+             data-recipe-difficulty="${recipe.difficulty}"
+             data-recipe-prepTime="${recipe.prepTime}"
+             data-recipe-instructions="${recipe.instructions}">
+            ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.name}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;">` : ''}
+            <h3>${recipe.name}</h3>
+            <p><strong>Ingredients:</strong> ${recipe.ingredients.join(", ")}</p>
+            <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
+            <p><strong>Prep Time:</strong> ${recipe.prepTime} minutes</p>
+            <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+        </div>
+    `).join("");
+
+    const saveButtons = document.querySelectorAll('.save-btn');
+    saveButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            saveRecipeFromCard(button);
+        });
+    });
+}
+
+
+
+
+
+
+        fetchRecipes();
+
+
+
+
+
         document.addEventListener("DOMContentLoaded", () => {
             const darkModeToggle = document.getElementById("darkModeToggle");
 
