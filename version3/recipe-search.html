@@ -383,7 +383,7 @@ function filterRecipes() {
 
     // Filter recipes based on ingredients
     recipeItems.forEach(recipe => {
-        const recipeIngredients = recipe.dataset.ingredients.toLowerCase();
+        const recipeIngredients = recipe.dataset.recipeIngredients.toLowerCase();
 
         // Check if all ingredients in the input are included in the recipe's ingredients
         const matchesAll = ingredientsArray.every(inputIngredient => recipeIngredients.includes(inputIngredient));

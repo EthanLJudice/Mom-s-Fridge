@@ -1,2 +1,3 @@
+
+Chocolate Avocado Smoothie|avocado,banana,chocolate milk|Easy|3-5 mins|instructions: "1. Add avocado, banana, and chocolate milk to blender and blend until smooth,2. Pour into glass and enjoy!"|image: "http://127.0.0.1:5500/version3/uploads/ChocolateAvocadoSmoothie.png"
 Omelette|eggs,cheese|Easy|10 mins|instructions: "1. Beat eggs,2. Pour into a hot pan,3. Add cheese and cook until set"|image: "http://127.0.0.1:5500/version3/uploads/omelette.png"
-Nachos|ground beef,cheese,chips|Easy|15 mins|instructions: "1. Cook ground beef in a large skillet,2. Lay out your chips on a baking pan,3. Put your cooked beef into the crevices of the chips and layer the top with cheese,4. Bake your nachos for 5-10 minutes then serve"|image: "http://127.0.0.1:5500/version3/uploads/nachos.png
